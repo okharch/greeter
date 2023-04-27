@@ -3,6 +3,7 @@
 SCRIPT_DIR="$(dirname "$(readlink -f "$0")")"
 cd "$SCRIPT_DIR"
 # make sure protoc installed
+sudo apt install protobuf-compiler
 go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.1
 # remove previous artifacts
 rm -rf github.com *.pb.go
