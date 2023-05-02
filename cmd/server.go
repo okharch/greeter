@@ -2,8 +2,10 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"log"
 	"net"
+	"time"
 
 	pb "github.com/okharch/greeter"
 	"google.golang.org/grpc"
@@ -13,8 +15,12 @@ type server struct {
 	pb.UnimplementedGreeterServer
 }
 
-func (s *server) SayHello(ctx context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
+func (s *server) SayHello(_ context.Context, req *pb.HelloRequest) (*pb.HelloReply, error) {
 	return &pb.HelloReply{Message: "Hello " + req.Name}, nil
+}
+
+func (s *server) SayTime(_ context.Context, _ *pb.EmptyRequest) (*pb.HelloReply, error) {
+	return &pb.HelloReply{Message: fmt.Sprintf("Time now %v", time.Now())}, nil
 }
 
 func main() {
